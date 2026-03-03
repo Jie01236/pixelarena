@@ -10,6 +10,18 @@ function Navbar() {
     // TODO 1: const unsub1 = eventBus.on('game:joined', () => setNotifications(n => n + 1))
     // TODO 2: const unsub2 = eventBus.on('cart:updated', ({ count }) => setCartCount(count))
     // TODO 3: return () => { unsub1(); unsub2(); }
+    const unsubscribeGameJoined = eventBus.on('game:joined', () => {
+      setNotifications(prev => prev + 1);
+    });
+    //s'abonner à cart:updated → mettre à jour le badge panier (count)
+    const unsubscribeCartUpdated = eventBus.on('cart:updated', (data) => {
+      setCartCount(data.count);
+    });
+    //retourner le cleanup des 2 abonnements
+    return () => {
+      unsubscribeGameJoined();
+      unsubscribeCartUpdated();
+    };
   }, []);
 
   return (
