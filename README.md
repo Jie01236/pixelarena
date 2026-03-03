@@ -1,39 +1,39 @@
-# CP3 — La Résurrection
+# CP5 — Le Catalogue
 
-Télécharge le zip depuis le dossier partagé Teams et extrais-le.
+Télécharge le zip **checkpoint5** depuis Teams.
 
 ```bash
-# Terminal 1
-cd mfe-header && npm install && npm start   # → localhost:3001
-
-# Terminal 2
-cd shell && npm install && npm start        # → localhost:3000
+T1 : cd mfe-catalog && npm install && npm start  # 3003
+T2 : cd mfe-header  && npm install && npm start  # 3001
+T3 : cd mfe-lobby   && npm install && npm start  # 3002
+T4 : cd shell       && npm install && npm start  # 3000
 ```
 
 ---
 
 ## Mission
 
-### mfe-header/webpack.config.js — 4 TODOs
+Créer `mfe-catalog` de A à Z et le brancher sur le Shell.
 
-```js
-name: 'mfeHeader',
-filename: 'remoteEntry.js',
-exposes: { './Navbar': './src/components/Navbar' },
-shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
-```
+**`mfe-catalog/webpack.config.js`**
+→ 4 TODOs : configurer Module Federation (name, filename, exposes, shared)
 
-### shell/webpack.config.js — 1 TODO
+**`mfe-catalog/src/components/Catalog.jsx`**
+→ Notifier l'eventBus quand l'utilisateur ajoute un produit
 
-```js
-remotes: {
-  mfeHeader: 'mfeHeader@http://localhost:3001/remoteEntry.js',
-},
-```
+**`shell/webpack.config.js`**
+→ Déclarer `mfe-catalog` comme remote (port 3003)
+
+**`shell/src/App.jsx`**
+→ Importer et afficher le Catalog
 
 ---
 
 ## Validation
 
-- http://localhost:3000 affiche le Header chargé depuis le port 3001
-- Push ta branche
+- `localhost:3000` → 6 produits s'affichent dans la Boutique
+- Console : `[EventBus] cart:add { id, name, price }` au clic sur "Ajouter"
+
+---
+
+📤 Push ta branche
