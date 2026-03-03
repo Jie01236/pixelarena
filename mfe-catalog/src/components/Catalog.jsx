@@ -13,7 +13,9 @@ const PRODUCTS = [
 
 function ProductCard({ product }) {
   const handleAddToCart = () => {
-    
+    // TODO: Emettre l'evenement 'cart:add' avec les infos du produit
+    // eventBus.emit('cart:add', { id, name, price })
+
     eventBus.emit('cart:add', {
       id: product.id,
       name: product.name,
