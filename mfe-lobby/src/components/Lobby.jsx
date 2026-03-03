@@ -11,14 +11,8 @@ const GAMES = [
 
 function GameCard({ game }) {
   const handleJoinGame = () => {
-    // TODO 3: Emettre l'evenement 'game:joined' avec le nom de la partie
-    //
-    // Indice: eventBus.emit('nomEvenement', { cle: valeur })
-    //
-    // L'evenement doit contenir: { gameName: game.name }
-    //
-    // Ecrivez votre code ici:
-
+    // Emettre l'evenement 'game:joined' avec le nom de la partie
+    eventBus.emit('game:joined', { gameName: game.name });
 
     // Feedback visuel (gardez cette ligne)
     alert(`Vous avez rejoint : ${game.name}`);
