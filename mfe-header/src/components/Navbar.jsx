@@ -7,9 +7,19 @@ function Navbar() {
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
-    // TODO 1 : s'abonner à game:joined → incrémenter le badge notifications
-    // TODO 2 : s'abonner à cart:updated → mettre à jour le badge panier (count)
-    // TODO 3 : retourner le cleanup des 2 abonnements
+    // s'abonner à game:joined → incrémenter le badge notifications
+    const unsubscribeGameJoined = eventBus.on('game:joined', () => {
+      setNotifications(prev => prev + 1);
+    });
+    //s'abonner à cart:updated → mettre à jour le badge panier (count)
+    const unsubscribeCartUpdated = eventBus.on('cart:updated', (data) => {
+      setCartCount(data.count);
+    });
+    //retourner le cleanup des 2 abonnements
+    return () => {
+      unsubscribeGameJoined();
+      unsubscribeCartUpdated();
+    };
   }, []);
 
   return (
