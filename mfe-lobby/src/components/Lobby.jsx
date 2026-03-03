@@ -21,7 +21,6 @@ function GameCard({ game }) {
 
 
     // Feedback visuel (gardez cette ligne)
-    eventBus.emit('game:joined', { gameName: game.name });
     alert(`Vous avez rejoint : ${game.name}`);
   };
 
