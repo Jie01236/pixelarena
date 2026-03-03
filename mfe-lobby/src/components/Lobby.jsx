@@ -11,8 +11,8 @@ const GAMES = [
 
 function GameCard({ game }) {
   const handleJoinGame = () => {
-    
     eventBus.emit('game:joined', { gameName: game.name });
+    alert(`Vous avez rejoint : ${game.name}`);
   };
 
   return (

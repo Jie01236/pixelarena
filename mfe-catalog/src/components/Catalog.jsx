@@ -13,6 +13,7 @@ const PRODUCTS = [
 
 function ProductCard({ product }) {
   const handleAddToCart = () => {
+    
     eventBus.emit('cart:add', {
       id: product.id,
       name: product.name,

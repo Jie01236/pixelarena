@@ -4,17 +4,12 @@ import './Navbar.css';
 
 function Navbar() {
   const [notifications, setNotifications] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
-    const unsubscribe = eventBus.on('game:joined', (data) => {
-      setNotifications((n) => n + 1);
-      console.log('game joined:', data && data.gameName);
-    });
-
-    return () => {
-      if (typeof unsubscribe === 'function') unsubscribe();
-    };
-
+    // TODO 1 : s'abonner à game:joined → incrémenter le badge notifications
+    // TODO 2 : s'abonner à cart:updated → mettre à jour le badge panier (count)
+    // TODO 3 : retourner le cleanup des 2 abonnements
   }, []);
 
   return (
@@ -26,12 +21,21 @@ function Navbar() {
 
       <div className="navbar-menu">
         <button className="nav-button">Lobby</button>
-        <button className="nav-button">Scores</button>
+        <button className="nav-button">Boutique</button>
       </div>
 
       <div className="navbar-user">
         <span className="username">Joueur_42</span>
+
+        {/* Icone Panier */}
+        <button className="nav-button cart-btn">
+          🛒
+          {cartCount > 0 && <span className="badge cart-badge">{cartCount}</span>}
+        </button>
+
+        {/* Icone Notifications */}
         <button className="nav-button notification-btn">
+          🔔
           {notifications > 0 && <span className="badge">{notifications}</span>}
         </button>
       </div>
