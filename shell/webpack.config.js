@@ -42,12 +42,10 @@ module.exports = {
   plugins: [
     new ModuleFederationPlugin({
       name: 'shell',
-
-      remotes: {},
-
+      // TODO: remotes: { mfeHeader: 'mfeHeader@http://localhost:3001/remoteEntry.js' },
       shared: {
-        react: { singleton: true},
-        'react-dom': { singleton: true},
+        react: { singleton: true, requiredVersion: '^18.2.0' },
+        'react-dom': { singleton: true, requiredVersion: '^18.2.0' },
       },
     }),
     new HtmlWebpackPlugin({
